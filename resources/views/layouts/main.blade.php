@@ -12,9 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{$title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
-    <meta name="author" content="FREEHTML5.CO"/>
+    <meta name="description" content="Окна в Харькове. Окна как для себя."/>
+    <meta name="keywords" content="окна, Харьков, установка, замер, под ключ, отзывы" />
 
     <!--
       //////////////////////////////////////////////////////

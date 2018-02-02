@@ -15,21 +15,19 @@
                 </div>
                 <div class="col-md-4" id="fh5co-sidebar">
                     <div class="fh5co-service text-left">
-                        <img src="/storage/works/{{ $work->id }}/default.jpg" class="img-responsive img-bordered" alt="Free HTML5 Bootstrap Template by FreeHTML5.co">
-                        <h3>Web Design</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ullam unde, totam harum laboriosam dolores.</p>
-                        <ul class="ul_style_1">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipisicing elit</li>
-                            <li>Recusandae laboriosam eligendi maiores</li>
-                            <li>Sapiente repudiandae perspiciatis</li>
-                        </ul>
+                        <img src="{{asset('/storage/'.$work->image)}}" class="img-responsive img-bordered">
+                        @if(count($work->articles) > 0)
+                            <h3>Как мы это сделали?</h3>
+                            <p>Вот ссылки на статьи по этой теме:</p>
+                            <ul class="ul_style_1">
+                                @foreach($work->articles as $article)
+                                    <li><a href="{{ '/articles/'.$article->slug }}">{{ $article->title }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection

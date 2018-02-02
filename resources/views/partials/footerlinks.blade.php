@@ -3,7 +3,7 @@
         <h3>Популярное</h3>
         <ul class="fh5co-footer-link">
             @foreach($footerlinks as $link)
-                <li><a href="{{'/articles/'.$link->slug}}">{{$link->title}}</a></li>
+                <li><a href="{{ '/articles/'.$link->slug }}">{{ $link->title }}</a></li>
             @endforeach
         </ul>
     </div>

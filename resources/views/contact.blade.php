@@ -114,7 +114,8 @@
                             <strong>Внимание:</strong> убедитесь, что Вы заполнили все необходимые поля!
                         </div>
                         <div class="form-group">
-                            <input id="submitButton" type="button" class="btn btn-primary" value="Свяжитесь со мной" onclick="submitIfChecked()">
+                            <input id="submitButton" type="button" class="btn btn-primary" value="Свяжитесь со мной"
+                                   onclick="submitIfChecked()">
                         </div>
                     </form>
                 </div>

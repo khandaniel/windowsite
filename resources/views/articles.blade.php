@@ -2,7 +2,7 @@
 @section('content')
     <div class="fh5co-slider">
         <div class="container">
-            <img src="/images/slider_2.jpg" alt="Free HTML5 Website Template" class="img-responsive">
+            <img src="{{ asset('/storage/slider/articles/default.jpg') }}">
         </div>
     </div>
     <!-- Slider -->
@@ -17,7 +17,7 @@
             </div>
             <div class="row row-bottom-padded-sm">
                 @foreach($categories as $category)
-                    @include('partials.category')
+                    @include('partials.category_badge')
                 @endforeach
             </div>
             @include('partials.important')

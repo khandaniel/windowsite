@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Mail\CallbackNotification;
 use App\Work;
+use Illuminate\Support\Str;
 use Mail;
 use App\Article;
 use App\Callback;
@@ -95,34 +96,44 @@ class IndexController extends Controller
         return Page::where('slug', $slug)->first();
     }
 
+    private function getCategoryId($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        return $category->id;
+    }
+
     public function getArticleBySlug($slug)
     {
         return Article::where('slug', $slug)->first();
     }
 
-    public function getWorkById($id) {
+    public function getWorkById($id)
+    {
         return Work::where('id', $id)->first();
     }
 
-    public function getFooterLinks()
+    public function getFooterLinks($number)
     {
-        return Article::orderBy('clicks', 'DESC')->simplePaginate(4);
+        return Article::orderBy('clicks', 'DESC')->take($number)->get();
     }
 
     private function prepareDataArray($type = null, $slug = null, $additionals = null)
     {
         $array = [
             'about' => $this->getPageBySlug('about'),
-            'footerlinks' => $this->getFooterLinks(),
+            'footerlinks' => $this->getFooterLinks(4),
             'title' => 'Окна в Харькове'
         ];
         if ($type == 'index') {
             $array['main'] = $this->getPageBySlug('main');
             $array['title'] = $array['main']['title'] . ' :: ' . $array['title'];
+            $array['important'] = $this->getPageBySlug('important');
+            $array['footerArticles'] = $this->getFooterLinks(3);
         }
-        if($type == 'about') {
+        if ($type == 'about') {
             $array['important'] = $this->getPageBySlug('important');
             $array['title'] = $array['about']['title'] . ' :: ' . $array['title'];
+            $array['bestWorks'] = Work::orderBy('rate', 'ASC')->take(4)->get();
         }
         if ($type == 'article') {
             if ($slug) {
@@ -133,6 +144,11 @@ class IndexController extends Controller
                 $array['important'] = $this->getPageBySlug('important');
             }
             $array['articles_desc'] = $this->getPageBySlug('articles');
+        } elseif ($type == 'category') {
+            $array['articles'] = Article::where('category_id', $this->getCategoryId($slug))->get();
+            $array['works'] = Work::where('category_id', $this->getCategoryId($slug))->get();
+            $array['category_alias'] = Category::where('slug', $slug)->first()->alias;
+            $array['title'] = 'Все в категории &laquo;' . Str::lower($array['category_alias']) . ' :: ' . $array['title'];
         } elseif ($type == 'contact') {
             $array['contact'] = $this->getPageBySlug('contact');
             $array['title'] = $array['contact']['title'] . ' :: ' . $array['title'];
@@ -213,5 +229,10 @@ class IndexController extends Controller
         } else {
             return view('works', $this->prepareDataArray('works'));
         }
+    }
+
+    public function category($slug)
+    {
+        return view('partials.list', $this->prepareDataArray('category', $slug));
     }
 }

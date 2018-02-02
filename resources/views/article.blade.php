@@ -10,21 +10,19 @@
                 </div>
                 <div class="col-md-4 col-md-pull-8" id="fh5co-sidebar">
                     <div class="fh5co-service text-left">
-                        <img src="/images/slider_2.jpg" class="img-responsive img-bordered" alt="Free HTML5 Bootstrap Template by FreeHTML5.co">
-                        <h3>Web Design</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ullam unde, totam harum laboriosam dolores.</p>
-                        <ul class="ul_style_1">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipisicing elit</li>
-                            <li>Recusandae laboriosam eligendi maiores</li>
-                            <li>Sapiente repudiandae perspiciatis</li>
-                        </ul>
+                        <img src="{{asset("/storage/".$article->image)}}" class="img-responsive img-bordered">
+                        @if(count($article->works) > 0)
+                            <h3>Что из этого выходит?</h3>
+                            <p>Посмотрите наши работы из портфолио:</p>
+                            <ul class="ul_style_1">
+                                @foreach($article->works as $work)
+                                    <li><a href="{{'/portfolio/'.$work->id }}">{{ $work->title }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection

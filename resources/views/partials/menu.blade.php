@@ -16,7 +16,6 @@
             if(url($item->link()) == url()->current()){
                 $listItemClass = 'active';
             }
-            // With Children Attributes
             if(!$originalItem->children->isEmpty()) {
                 if(url($item->link()) == url()->current()){
                     $listItemClass = 'has-sub active';

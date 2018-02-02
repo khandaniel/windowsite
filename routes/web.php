@@ -11,21 +11,7 @@
 |
 */
 
-
-Route::get('/test', function () {
-    class CBack {
-
-    }
-    $callback = new CBack();
-    $callback->id = 0;
-    $callback->phone_number = '839128390128';
-    $callback->name = 'Name';
-    $callback->email = 'Name@f.co';
-    $callback->email = 'Name@f.co';
-    $callback->textorcall = 'TEXT';
-    $callback->message = 'Message';
-    return view('emails.callback', ['callback' => $callback]);
-});
+Route::get('/categories/{slug}', 'IndexController@category');
 
 Route::get('/portfolio/{id?}', 'IndexController@portfolio');
 
@@ -47,4 +33,4 @@ Route::group(['prefix' => 'admin'], function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function() {return redirect('/admin');})->name('home');
