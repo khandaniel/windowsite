@@ -233,6 +233,6 @@ class IndexController extends Controller
 
     public function category($slug)
     {
-        return view('partials.list', $this->prepareDataArray('category', $slug));
+        return view('category', $this->prepareDataArray('category', $slug));
     }
 }
