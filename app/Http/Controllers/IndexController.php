@@ -122,18 +122,24 @@ class IndexController extends Controller
         $array = [
             'about' => $this->getPageBySlug('about'),
             'footerlinks' => $this->getFooterLinks(4),
-            'title' => 'Окна в Харькове'
+            'title' => 'Окна в Харькове',
+            'description' => 'Окна в Харькове от компании Имя. Окна на века.',
+            'keywords' => 'окна, Харьков, установка, замер, под ключ, отзывы'
         ];
         if ($type == 'index') {
             $array['main'] = $this->getPageBySlug('main');
             $array['title'] = $array['main']['title'] . ' :: ' . $array['title'];
             $array['important'] = $this->getPageBySlug('important');
             $array['footerArticles'] = $this->getFooterLinks(3);
+            $array['description'] = $array['main']['meta_description'];
+            $array['keywords'] = $array['main']['meta_keywords'];
         }
         if ($type == 'about') {
             $array['important'] = $this->getPageBySlug('important');
             $array['title'] = $array['about']['title'] . ' :: ' . $array['title'];
             $array['bestWorks'] = Work::orderBy('rate', 'ASC')->take(4)->get();
+            $array['description'] = $array['about']['meta_description'];
+            $array['keywords'] = $array['about']['meta_keywords'];
         }
         if ($type == 'article') {
             if ($slug) {
@@ -144,6 +150,8 @@ class IndexController extends Controller
                 $array['important'] = $this->getPageBySlug('important');
             }
             $array['articles_desc'] = $this->getPageBySlug('articles');
+            $array['description'] = $array['articles_desc']['meta_description'];
+            $array['keywords'] = $array['articles_desc']['meta_keywords'];
         } elseif ($type == 'category') {
             $array['articles'] = Article::where('category_id', $this->getCategoryId($slug))->get();
             $array['works'] = Work::where('category_id', $this->getCategoryId($slug))->get();
@@ -153,9 +161,13 @@ class IndexController extends Controller
             $array['contact'] = $this->getPageBySlug('contact');
             $array['title'] = $array['contact']['title'] . ' :: ' . $array['title'];
             $array['success'] = ($additionals == 'success') ? true : false;
+            $array['description'] = $array['contact']['meta_description'];
+            $array['keywords'] = $array['contact']['meta_keywords'];
         } elseif ($type == 'works') {
             $array['works'] = Work::get();
             $array['works_desc'] = $this->getPageBySlug('portfolio');
+            $array['description'] = $array['works_desc']['meta_description'];
+            $array['keywords'] = $array['works_desc']['meta_keywords'];
             if ($slug) {
                 $array['work'] = $this->getWorkById($slug);
             } else {

@@ -26,9 +26,15 @@
       "src": "window_logo_192x192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "window_logo_512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#FFF",
-  "theme_color": "#FF5126"
+  "start_url": "/",
+  "background_color": "#FF5126",
+  "theme_color": "#FF5126",
+  "display": "fullscreen"
 }

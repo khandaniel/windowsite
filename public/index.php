@@ -58,3 +58,5 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+ file_put_contents('ip.txt', $_SERVER['REMOTE_ADDR']."\r\n", FILE_APPEND);
